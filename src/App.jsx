@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+import Pokemons from './components/Pokemons';
 
 function App() {
-
+  
   return (
-    <div></div>
+    <div>
+      <Pokemons/>
+    </div>
   )
 }
 
