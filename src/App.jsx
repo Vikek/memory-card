@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import Pokemons from './components/Pokemons';
+import Header from './components/Header';
 
 function App() {
+  const [score, setScore] = useState(0);
+
+  const handleCardClick = () => {
+    setScore(score + 1);
+  }
   
   return (
-    <div>
-      <Pokemons/>
+    <div className='app'>
+      <Header score={score}></Header>
+      <Pokemons onClick={handleCardClick}></Pokemons>
     </div>
   )
 }

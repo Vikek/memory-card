@@ -1,7 +1,7 @@
 import usePokemonHandler from '../usePokemonHandler'
 import { useState, useEffect } from 'react'
 
-function Pokemons() {
+function Pokemons({onClick}) {
     const { createRandomPokemonList } = usePokemonHandler();
     const [pokemons, setpokemons] = useState([]);
 
@@ -16,7 +16,7 @@ function Pokemons() {
     return (
         <div>
             {pokemons.map((pokemon, index) => (
-                <div key={index}>
+                <div key={index} onClick={onClick}>
                     <img src={pokemon.img} alt={pokemon.name} />
                     <span>{pokemon.name}</span>
                 </div>
