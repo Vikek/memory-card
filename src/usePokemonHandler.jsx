@@ -10,7 +10,7 @@ function usePokemonHandler() {
     const createRandomPokemonList = async(amount) => {
         let pokemonIdList = [];
         for(let i = 0; i < amount; i++) {
-            let randomId = Math.floor(Math.random() * availablePokemonAmount) + 1;
+            let randomId = Math.floor(Math.random() * (availablePokemonAmount - 1)) + 1;
             if (pokemonIdList.includes(randomId)) {
                 continue;
             } else {
