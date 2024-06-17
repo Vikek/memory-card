@@ -4,7 +4,7 @@ function usePokemonHandler() {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const {sprites, name} = await res.json();
         const img = sprites['front_default'];
-        return {img, name};
+        return {img, name, id};
     }
 
     const createRandomPokemonList = async(amount) => {

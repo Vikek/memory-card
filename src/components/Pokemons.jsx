@@ -1,44 +1,66 @@
 import usePokemonHandler from '../usePokemonHandler'
 import { useState, useEffect } from 'react'
 
-function Pokemons({setScore, score}) {
+function Pokemons({setScore, setGameState}) {
     const { createRandomPokemonList } = usePokemonHandler();
-    const [pokemons, setpokemons] = useState([]);
+    const [pokemons, setPokemons] = useState([]);
+    const [clickedPokemonIds, setClickedPokemonIds] = useState([]);
 
     useEffect(() => {
         const getPokemons = async () => {
             const pokemonList = await createRandomPokemonList(5);
-            setpokemons(pokemonList);
+            setPokemons(pokemonList);
         }
         getPokemons();
     }, []);
 
-    const handleCardClick = () => {
-        setScore(score + 1);
+    const handleCardClick = (e, pokemon) => {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(clickedPokemonIds);
+
+        if(clickedPokemonIds.includes(pokemon.id)) { //check lose
+            setGameState('lose');
+            console.log('you lost!');
+            reset();
+            return;
+        }
+
+        setClickedPokemonIds(idList => [...idList, pokemon.id]);
+        setScore(prevScore => prevScore + 1);
+        
+        if(clickedPokemonIds.length >= pokemons.length - 1) { //check win
+            setGameState('win');
+            console.log('you won!');
+            reset();
+            return;
+        }
+            
         shuffleCards();
     }
 
     const shuffleCards = () => {
-        let shuffledPokemons = pokemons;
+        setPokemons(prevPokemons => {
+            const shuffledPokemons = [...prevPokemons];
 
-        let currentIndex = shuffledPokemons.length;
+            for (let i = shuffledPokemons.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledPokemons[i], shuffledPokemons[j]] = [shuffledPokemons[j], shuffledPokemons[i]];
+            }
 
-        while (currentIndex != 0) {
+            return shuffledPokemons;
+        });
+    }
 
-            let randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            [shuffledPokemons[currentIndex], shuffledPokemons[randomIndex]] = 
-            [shuffledPokemons[randomIndex], shuffledPokemons[currentIndex]];
-        }
-
-        setpokemons(shuffledPokemons)
+    const reset = () => {
+        setPokemons([]);
+        setClickedPokemonIds([]);
     }
 
     return (
         <div>
             {pokemons.map((pokemon, index) => (
-                <div key={index} onClick={handleCardClick}>
+                <div key={index} id={pokemon.name} onClick={(e) => handleCardClick(e, pokemon)}>
                     <img src={pokemon.img} alt={pokemon.name} />
                     <span>{pokemon.name}</span>
                 </div>
