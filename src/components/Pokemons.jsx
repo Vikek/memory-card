@@ -58,9 +58,9 @@ function Pokemons({setScore, setGameState}) {
     }
 
     return (
-        <div>
+        <div className='pokemons-container'>
             {pokemons.map((pokemon, index) => (
-                <div key={index} id={pokemon.name} onClick={(e) => handleCardClick(e, pokemon)}>
+                <div key={index} className='pokemon' id={pokemon.name} onClick={(e) => handleCardClick(e, pokemon)}>
                     <img src={pokemon.img} alt={pokemon.name} />
                     <span>{pokemon.name}</span>
                 </div>

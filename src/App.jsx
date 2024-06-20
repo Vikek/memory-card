@@ -24,16 +24,20 @@ function App() {
     case 'win':
       return (
         <div className='app'>
-          You won! score: {score}
-          <button onClick={restartGame}>Restart</button>
+          <div className='win-screen'>
+            You won! score: {score}
+            <button onClick={restartGame}>Restart</button>
+          </div>
         </div>
       )
   
     case 'lose':
       return (
         <div className='app'>
-          You lost! score: {score}
-          <button onClick={restartGame}>Restart</button>
+          <div className='lose-screen'>
+            You lost! score: {score}
+            <button onClick={restartGame}>Restart</button>
+          </div>
         </div>
       )
     default:
