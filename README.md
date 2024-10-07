@@ -1,8 +1,6 @@
-# React + Vite
+# Memory Card Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A memory card game with Pokémon
+This project was made to test my skills and knowledge with React. The goal of the game is to click every Pokémon once. The game will end once the player clicks the same Pokémon twice resulting in a loss. Or if the player manages to click every Pokémon exactly once resulting in a win.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live Demo](https://memory-card-game-woad-xi.vercel.app/)
