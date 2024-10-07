@@ -1,14 +1,31 @@
 import usePokemonHandler from '../usePokemonHandler'
 import { useState, useEffect } from 'react'
 
-function Pokemons({setScore, setGameState}) {
+function Pokemons({setScore, setGameState, difficulty}) {
     const { createRandomPokemonList } = usePokemonHandler();
     const [pokemons, setPokemons] = useState([]);
     const [clickedPokemonIds, setClickedPokemonIds] = useState([]);
 
     useEffect(() => {
         const getPokemons = async () => {
-            const pokemonList = await createRandomPokemonList(5);
+            let numberOfPokemons;
+            switch (difficulty) {
+                case 'easy':
+                    numberOfPokemons = 5;
+                    break;
+                
+                case 'medium':
+                    numberOfPokemons = 10;
+                    break;
+
+                case 'hard':
+                    numberOfPokemons = 15;
+                    break;
+                default:
+                    numberOfPokemons = 5
+                    break;
+            }
+            const pokemonList = await createRandomPokemonList(numberOfPokemons);
             setPokemons(pokemonList);
         }
         getPokemons();

@@ -2,10 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import Pokemons from './components/Pokemons';
 import Header from './components/Header';
+import DifficultySelection from './components/DifficultySelection';
 
 function App() {
   const [score, setScore] = useState(0);
-  const [gameState, setGameState] = useState('game');
+  const [gameState, setGameState] = useState('start');
+  const [difficulty, setDifficulty] = useState('medium');
 
   const restartGame = () => {
     setScore(0);
@@ -13,11 +15,18 @@ function App() {
   }
 
   switch (gameState) {
+    case 'start':
+      return (
+        <div className='app'>
+          <DifficultySelection setDifficulty={setDifficulty} restartGame={restartGame}></DifficultySelection>
+        </div>
+      )
+
     case 'game':
       return (
         <div className='app'>
           <Header score={score}></Header>
-          <Pokemons setScore={setScore} setGameState={setGameState}></Pokemons>
+          <Pokemons setScore={setScore} setGameState={setGameState} difficulty={difficulty}></Pokemons>
         </div>
       )
     
@@ -26,7 +35,7 @@ function App() {
         <div className='app'>
           <div className='win-screen'>
             You won! score: {score}
-            <button onClick={restartGame}>Restart</button>
+            <DifficultySelection setDifficulty={setDifficulty} restartGame={restartGame}></DifficultySelection>
           </div>
         </div>
       )
@@ -36,7 +45,7 @@ function App() {
         <div className='app'>
           <div className='lose-screen'>
             You lost! score: {score}
-            <button onClick={restartGame}>Restart</button>
+            <DifficultySelection setDifficulty={setDifficulty} restartGame={restartGame}></DifficultySelection>
           </div>
         </div>
       )
